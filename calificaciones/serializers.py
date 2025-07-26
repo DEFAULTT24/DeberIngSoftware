@@ -16,3 +16,8 @@ class CalificacionSerializer(serializers.ModelSerializer):
             'asignatura': {'help_text': 'ID de la asignatura'},
             'nota': {'help_text': 'Nota obtenida'},
         }
+
+    def validate_nota(self, value):
+        if value < 0 or value > 10:
+            raise serializers.ValidationError("La nota debe estar entre 0 y 10.")
+        return value
